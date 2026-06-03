@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio 06 URL Monitor</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="topbar">
+        <div>
+          <p class="eyebrow">Portfolio 06</p>
+          <h1>URL監視・死活監視ダッシュボード</h1>
+        </div>
+        <button id="refreshBtn" class="icon-button" title="再読み込み">↻</button>
+      </section>
+
+      <section class="metrics" aria-label="監視サマリー">
+        <article>
+          <span>登録URL</span>
+          <strong id="totalMetric">0</strong>
+        </article>
+        <article>
+          <span>正常</span>
+          <strong id="healthyMetric">0</strong>
+        </article>
+        <article>
+          <span>障害</span>
+          <strong id="downMetric">0</strong>
+        </article>
+        <article>
+          <span>平均応答</span>
+          <strong><span id="latencyMetric">0</span>ms</strong>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <form id="serviceForm" class="panel">
+          <h2>URL登録</h2>
+          <label>
+            表示名
+            <input id="nameInput" required placeholder="Company Site" />
+          </label>
+          <label>
+            監視URL
+            <input id="urlInput" required type="url" placeholder="https://example.com" />
+          </label>
+          <label>
+            期待ステータス
+            <input id="statusInput" required type="number" value="200" min="100" max="599" />
+          </label>
+          <button type="submit">登録する</button>
+          <p id="formMessage" class="message"></p>
+        </form>
+
+        <section class="panel">
+          <div class="section-head">
+            <h2>監視対象</h2>
+            <span id="updatedAt">--</span>
+          </div>
+          <div id="serviceList" class="service-list"></div>
+        </section>
+      </section>
+
+      <section class="panel">
+        <div class="section-head">
+          <h2>最新履歴</h2>
+          <span>直近50件</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>日時</th>
+                <th>サービス</th>
+                <th>状態</th>
+                <th>ステータス</th>
+                <th>応答</th>
+                <th>エラー</th>
+              </tr>
+            </thead>
+            <tbody id="historyBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
