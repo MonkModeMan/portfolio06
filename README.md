@@ -40,13 +40,37 @@ Goで作ったURL監視・死活監視ダッシュボードです。URLを登録
 ## 起動
 
 ```bash
-docker compose up --build
+docker compose up -d --build
 ```
 
 起動後、ブラウザで以下を開きます。
 
 ```text
 http://localhost:8080
+```
+
+## PC再起動後も表示する設定
+
+このプロジェクトは `docker-compose.yml` に `restart: unless-stopped` を設定しているため、Docker Desktopのエンジンが起動するとアプリとPostgreSQLコンテナが自動復帰します。
+
+PC再起動後も `http://localhost:8080` を継続して表示したい場合は、Docker Desktopで以下を有効にしてください。
+
+1. Docker Desktopを開く
+2. Settings > General を開く
+3. `Start Docker Desktop when you sign in` を有効にする
+
+初回または設定変更後は、以下を一度実行します。
+
+```bash
+docker compose up -d --build
+```
+
+以後はPC再起動後、Docker Desktopが起動すると自動的に `portfolio06-app-1` と `portfolio06-db-1` が復帰します。
+
+停止したい場合は以下を実行します。
+
+```bash
+docker compose down
 ```
 
 ## API
